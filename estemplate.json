@@ -1,6 +1,6 @@
 //template for es, noted to modify shard/replica number and mappings(/ecs/tomcat) to loggroup
 
-curl -XPUT https://search-testa-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_template/cwl -d '
+curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_template/cwl -d '
 {
     "index_patterns": ["*"],
     "settings": {
