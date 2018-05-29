@@ -1,0 +1,56 @@
+//template for es, noted to modify shard/replica number and mappings(/ecs/tomcat) to loggroup
+
+curl -XPUT https://search-testa-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_template/cwl -d '
+{
+    "index_patterns": ["*"],
+    "settings": {
+      "number_of_shards": 2,
+      "number_of_replicas": 1
+    },  
+    "mappings" : {
+        "/ecs/tomcat" : {
+          "properties" : {
+            "@id" : {
+                "type" : "keyword"
+              },
+              "@log_group" : {
+                "type" : "keyword"
+              },
+              "@log_stream" : {
+                "type" : "keyword"
+              },
+              "@message" : {
+                "type" : "keyword"
+              },
+              "@owner" : {
+                "type" : "keyword"
+              },
+              "@timestamp" : {
+                "type" : "date"
+              },
+              "class" : {
+                "type" : "keyword"
+              },
+              "ip" : {
+                "type" : "keyword"
+              },
+              "level" : {
+                "type" : "keyword"
+              },
+              "message" : {
+                "type" : "keyword"
+              },
+              "separator" : {
+                "type" : "keyword"
+              },
+              "thread" : {
+                "type" : "keyword"
+              },
+              "timestamp" : {
+                "type" : "date",
+                "format": "yyyy.MM.dd HH:mm:ss.SSS"
+              }    
+          }
+        }
+    }
+}' -H "Content-Type: application/json"
