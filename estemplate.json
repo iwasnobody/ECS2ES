@@ -2,31 +2,19 @@
 
 curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_template/cwl -d '
 {
-    "index_patterns": ["*"],
+    "index_patterns": ["cwl-*"],
     "settings": {
-      "number_of_shards": 2,
+      "number_of_shards": 1,
       "number_of_replicas": 1
     },  
     "mappings" : {
-        "/ecs/tomcat" : {
+        "/ecs-docker-qa" : {
           "properties" : {
-            "@id" : {
-                "type" : "keyword"
-              },
               "@log_group" : {
                 "type" : "keyword"
               },
               "@log_stream" : {
                 "type" : "keyword"
-              },
-              "@message" : {
-                "type" : "keyword"
-              },
-              "@owner" : {
-                "type" : "keyword"
-              },
-              "@timestamp" : {
-                "type" : "date"
               },
               "class" : {
                 "type" : "keyword"
@@ -35,6 +23,9 @@ curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_t
                 "type" : "keyword"
               },
               "level" : {
+                "type" : "keyword"
+              },
+              "uuid" : {
                 "type" : "keyword"
               },
               "message" : {
@@ -53,4 +44,4 @@ curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_t
           }
         }
     }
-}' -H "Content-Type: application/json"
+}
