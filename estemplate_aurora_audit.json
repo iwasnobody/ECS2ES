@@ -1,0 +1,47 @@
+//template for aurora audit logs to es, noted to modify shard/replica number and mappings(/ecs/tomcat) to loggroup
+
+curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_template/aurora -d '
+{
+    "index_patterns": ["aurora-*"],
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    },  
+    "mappings" : {
+        "/ecs-docker-qa" : {
+          "properties" : {
+              "returncode" : {
+                "type" : "keyword"
+              },
+              "sql" : {
+                "type" : "keyword"
+              },
+              "database" : {
+                "type" : "keyword"
+              },
+              "operation" : {
+                "type" : "keyword"
+              },
+              "queryid" : {
+                "type" : "keyword"
+              },
+              "connectionid" : {
+                "type" : "keyword"
+              },
+              "client" : {
+                "type" : "keyword"
+              },
+              "username" : {
+                "type" : "keyword"
+              },
+              "instance" : {
+                "type" : "keyword"
+              },
+              "timestamp" : {
+                "type" : "date",
+                "format": "epoch_second"
+              }    
+          }
+        }
+    }
+}
