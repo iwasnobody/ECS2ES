@@ -1,4 +1,4 @@
-//lambda for streaming logs in cloudwatch to es, tailored for create index that prefix with ecsservicename-year.month.day
+//lambda for streaming ecs logs in cloudwatch to es, tailored for create index that prefix with ecsservicename-year.month.day
 //ecs should config logstream with /servicename
 
 // v1.1.2
