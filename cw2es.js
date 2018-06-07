@@ -6,7 +6,7 @@ var https = require('https');
 var zlib = require('zlib');
 var crypto = require('crypto');
 
-var endpoint = 'XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com';
+var endpoint = 'search-logs-prod-p4zc6ztc7gtt7bbk5eslpgw4gy.ap-northeast-1.es.amazonaws.com';
 
 exports.handler = function(input, context) {
     // decode input from base64
@@ -62,24 +62,25 @@ function transform(payload) {
     payload.logEvents.forEach(function(logEvent) {
         var timestamp = new Date(1 * logEvent.timestamp);
 
-        console.log(payload.logStream);
+        //console.log(payload.logStream);
         var split = payload.logStream.split('/');
-        console.log(split[1]);
+        //console.log(split[1]);
         
-         // index name format: ecsservicename-YYYY.MM.DD
+         // index name format: cwl-ecsservicename-YYYY.MM.DD
         var indexName = [
-            split[1] + '-' + timestamp.getUTCFullYear(),              // year
+            'cwl-' + split[1] + '-' + timestamp.getUTCFullYear(),              // year
             ('0' + (timestamp.getUTCMonth() + 1)).slice(-2),  // month
             ('0' + timestamp.getUTCDate()).slice(-2)          // day
         ].join('.');
-        
+
         var source = buildSource(logEvent.message, logEvent.extractedFields);
-        source['@id'] = logEvent.id;
-        source['@timestamp'] = new Date(1 * logEvent.timestamp).toISOString();
-        source['@message'] = logEvent.message;
-        source['@owner'] = payload.owner;
+        //source['@id'] = logEvent.id;
+        //source['@timestamp'] = new Date(1 * logEvent.timestamp).toISOString();
+        //source['@message'] = logEvent.message;
+        //source['@owner'] = payload.owner;
         source['@log_group'] = payload.logGroup;
         source['@log_stream'] = payload.logStream;
+        delete source['$message'];
 
         var action = { "index": {} };
         action.index._index = indexName;
