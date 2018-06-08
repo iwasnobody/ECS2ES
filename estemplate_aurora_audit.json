@@ -8,7 +8,7 @@ curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_t
       "number_of_replicas": 1
     },  
     "mappings" : {
-        "/ecs-docker-qa" : {
+        "/aurora/audit" : {
           "properties" : {
               "returncode" : {
                 "type" : "keyword"
@@ -28,7 +28,7 @@ curl -XPUT https://XXXX-lznr7n63hxwoc3zdpf6si42yja.us-east-1.es.amazonaws.com/_t
               "connectionid" : {
                 "type" : "keyword"
               },
-              "client" : {
+              "clientip" : {
                 "type" : "keyword"
               },
               "username" : {
